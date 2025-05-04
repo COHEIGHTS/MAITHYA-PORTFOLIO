@@ -175,13 +175,6 @@
     style="background-image: url('https://images.unsplash.com/photo-1516321310764-8d8a360dd69b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold font-poppins mb-8 text-center animate__animated animate__fadeInUp">About Me</h2>
-      <div class="flex justify-center mb-6">
-        <!-- Temporary Unsplash placeholder. To use your Google Photos image, download it from Google Photos and upload to Imgur or Dropbox to get a direct URL (e.g., https://i.imgur.com/abc1234.jpg). Replace this src with the new URL. -->
-        <img
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-          alt="Maithya Ndavi"
-          class="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-emerald-600 dark:border-emerald-400 profile-img object-cover">
-      </div>
       <div class="max-w-4xl mx-auto text-center font-inter glassmorphism p-8 rounded-lg hover-glow">
         <p class="mb-4">I am Maithya Ndavi, a dedicated Computer Science graduate from Egerton University, born and
           raised in Makindu, Makueni County, Kenya. My fascination with technology sparked at St. Stephen Makindu Boys’
@@ -237,7 +230,7 @@
           </p>
           <ul class="list-disc list-inside font-inter mt-2">
             <li>Designed and implemented a MySQL database system for attachment records, improving data retrieval
-              efficiency by 20%.</li>
+              efficiency by 20% farci.</li>
             <li>Conducted data cleaning and preprocessing using Python, ensuring data quality for analysis.</li>
             <li>Created data visualizations using Excel and Power BI for internal reports.</li>
             <li>Documented workflows to enhance team collaboration.</li>
@@ -273,7 +266,6 @@
   <!-- Project Modal -->
   <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-30">
     <div class="bg-white dark:bg-gray-800 p-8 rounded-lg max-w-lg w-full glassmorphism">
-      <img id="modal-image" src="" alt="Project Image" class="w-full h-48 object-cover rounded-lg mb-4 hidden">
       <h3 id="modal-title" class="text-2xl font-bold font-poppins mb-4"></h3>
       <p id="modal-description" class="font-inter mb-4"></p>
       <p id="modal-details" class="font-inter mb-4"></p>
@@ -512,13 +504,6 @@
     stagger: 0.2,
     ease: 'back.out(1.7)'
   });
-  gsap.from('.profile-img', {
-    scale: 0,
-    opacity: 0,
-    duration: 1,
-    delay: 0.5,
-    ease: 'elastic.out(1, 0.3)'
-  });
 
   // Dark Mode Toggle
   const darkModeToggle = document.getElementById('dark-mode-toggle');
@@ -554,7 +539,6 @@
   // Project Modal
   function openProjectModal(project) {
     const modal = document.getElementById('project-modal');
-    const image = document.getElementById('modal-image');
     const title = document.getElementById('modal-title');
     const description = document.getElementById('modal-description');
     const details = document.getElementById('modal-details');
@@ -565,17 +549,11 @@
         'A web-based platform to manage student internships, developed as a fourth-year project at Egerton University.';
       details.textContent =
         'Built with PHP, MySQL, and Tailwind CSS, the system features secure user authentication, grade submission, report generation, and a dashboard for supervisors and students. Improved internship coordination efficiency by 30%.';
-      image.src =
-        'https://images.unsplash.com/photo-1516321310764-8d8a360dd69b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80';
-      image.classList.remove('hidden');
     } else if (project === 'sales') {
       title.textContent = 'Sales Data Visualization';
       description.textContent = 'Built interactive dashboards with Power BI to visualize sales data.';
       details.textContent =
         'Created dynamic reports with drill-down capabilities, enabling stakeholders to analyze sales by region, product, and time period. Improved decision-making efficiency by 15%.';
-      image.src =
-        'https://images.unsplash.com/photo-1551288049-b1f3c31532b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80';
-      image.classList.remove('hidden');
     }
 
     modal.classList.remove('hidden');
