@@ -1,581 +1,541 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maithya Ndavi - Portfolio</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400&display=swap"
-    rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   <style>
-  .glassmorphism {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .dark .glassmorphism {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-  }
-
-  .skill-bar {
-    height: 12px;
-    background: #e5e7eb;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .skill-progress {
-    height: 100%;
-    background: #10b981;
-    transition: width 1.2s ease-in-out;
-  }
-
-  #back-to-top {
-    display: none;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 100;
-  }
-
-  .parallax {
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .hover-glow {
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .hover-glow:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  #particles-js {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 0;
-  }
-
-  .contact-icon {
-    transition: transform 0.3s;
-  }
-
-  .contact-icon:hover {
-    transform: scale(1.2);
-  }
-
-  .profile-img {
-    transition: transform 0.3s, box-shadow 0.3s;
-    min-height: 128px;
-    /* Ensures visibility if image fails to load */
-    background-color: #e5e7eb;
-    /* Fallback background color */
-    object-fit: cover;
-    /* Ensures image fits well */
-  }
-
-  .profile-img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    .glassmorphism {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .dark .glassmorphism {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    .hover-glow {
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .hover-glow:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .skill-bar {
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .skill-progress {
+      height: 100%;
+      background: #10b981;
+      transition: width 1.2s ease-in-out;
+    }
+    .neural-node {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #14B8A6;
+      border-radius: 50%;
+      animation: float 5s infinite ease-in-out;
+    }
+    .neural-node:nth-child(2) { left: 15%; top: 25%; animation-delay: 1s; background: #10B981; }
+    .neural-node:nth-child(3) { left: 65%; top: 45%; animation-delay: 2s; background: #14B8A6; }
+    .neural-node:nth-child(4) { left: 35%; top: 65%; animation-delay: 3s; background: #10B981; }
+    .neural-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(to right, #10B981, #14B8A6);
+      opacity: 0.5;
+      animation: pulse-line 3s infinite ease-in-out;
+    }
+    .section-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .section-bg .neural-node {
+      width: 8px;
+      height: 8px;
+      opacity: 0.3;
+      animation: float 8s infinite ease-in-out;
+    }
+    .pulse { animation: pulse 2s infinite ease-in-out; }
+    .data-flow {
+      position: relative;
+      overflow: hidden;
+    }
+    .data-flow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.3), transparent);
+      animation: flow 3s infinite linear;
+    }
+    .contact-node {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #14B8A6;
+      border-radius: 50%;
+      animation: orbit 4s infinite linear;
+    }
+    .contact-section:hover .contact-node { opacity: 1; }
+    .icon-bounce { animation: bounce 1.5s ease-in-out infinite; }
+    .contact-icon { transition: transform 0.3s; }
+    .contact-icon:hover { transform: scale(1.2); }
+    #back-to-top {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+    @keyframes pulse-line {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+    @keyframes flow {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes orbit {
+      0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+    }
   </style>
 </head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-<body class="bg-gray-100 font-sans text-gray-800 transition-colors duration-300">
-  <!-- Navigation -->
-  <nav class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 sticky top-0 z-20 shadow-lg glassmorphism">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold font-poppins">Maithya Ndavi</h1>
-      <div class="flex items-center space-x-4">
-        <ul class="hidden md:flex space-x-6">
-          <li><a href="#home" class="hover:text-gray-200 transition">Home</a></li>
-          <li><a href="#about" class="hover:text-gray-200 transition">About</a></li>
-          <li><a href="#education" class="hover:text-gray-200 transition">Education</a></li>
-          <li><a href="#experience" class="hover:text-gray-200 transition">Experience</a></li>
-          <li><a href="#projects" class="hover:text-gray-200 transition">Projects</a></li>
-          <li><a href="#skills" class="hover:text-gray-200 transition">Skills</a></li>
-          <li><a href="#testimonials" class="hover:text-gray-200 transition">Testimonials</a></li>
-          <li><a href="#contact" class="hover:text-gray-200 transition">Contact</a></li>
+    const ThemeToggle = () => {
+      const [darkMode, setDarkMode] = useState(false);
+      useEffect(() => {
+        document.body.classList.toggle('dark', darkMode);
+      }, [darkMode]);
+      return (
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="text-white hover:text-gray-200 p-2"
+        >
+          <i className={darkMode ? 'fas fa-sun' : 'fas fa-moon'}></i>
+        </button>
+      );
+    };
+
+    const Sidebar = () => (
+      <aside className="hidden lg:block fixed top-20 left-0 w-16 bg-gray-800 text-white h-full shadow-lg glassmorphism z-30">
+        <ul className="flex flex-col items-center space-y-6 py-6">
+          {[
+            { id: 'home', icon: 'fa-home', title: 'Home' },
+            { id: 'about', icon: 'fa-user', title: 'About' },
+            { id: 'education', icon: 'fa-graduation-cap', title: 'Education' },
+            { id: 'experience', icon: 'fa-briefcase', title: 'Experience' },
+            { id: 'skills', icon: 'fa-tools', title: 'Skills' },
+            { id: 'certifications', icon: 'fa-certificate', title: 'Certifications' },
+            { id: 'leadership', icon: 'fa-users', title: 'Leadership' },
+            { id: 'contact', icon: 'fa-envelope', title: 'Contact' }
+          ].map(item => (
+            <li key={item.id}>
+              <a href={`#${item.id}`} className="hover:text-emerald-400 transition" title={item.title}>
+                <i className={`fas ${item.icon} text-2xl`}></i>
+              </a>
+            </li>
+          ))}
         </ul>
-        <button id="dark-mode-toggle" class="text-white hover:text-gray-200">
-          <i class="fas fa-moon"></i>
-        </button>
-        <button id="mobile-menu-toggle" class="md:hidden text-white">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-    </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-emerald-600 text-white py-4">
-      <ul class="flex flex-col space-y-4 text-center">
-        <li><a href="#home" class="hover:text-gray-200 transition">Home</a></li>
-        <li><a href="#about" class="hover:text-gray-200 transition">About</a></li>
-        <li><a href="#education" class="hover:text-gray-200 transition">Education</a></li>
-        <li><a href="#experience" class="hover:text-gray-200 transition">Experience</a></li>
-        <li><a href="#projects" class="hover:text-gray-200 transition">Projects</a></li>
-        <li><a href="#skills" class="hover:text-gray-200 transition">Skills</a></li>
-        <li><a href="#testimonials" class="hover:text-gray-200 transition">Testimonials</a></li>
-        <li><a href="#contact" class="hover:text-gray-200 transition">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+      </aside>
+    );
 
-  <!-- Sidebar (Visible on large screens) -->
-  <aside class="hidden lg:block fixed top-20 left-0 w-16 bg-gray-800 text-white h-full shadow-lg glassmorphism">
-    <ul class="flex flex-col items-center space-y-6 py-6">
-      <li><a href="#home" class="hover:text-emerald-400 transition" title="Home"><i
-            class="fas fa-home text-2xl"></i></a></li>
-      <li><a href="#about" class="hover:text-emerald-400 transition" title="About"><i
-            class="fas fa-user text-2xl"></i></a></li>
-      <li><a href="#education" class="hover:text-emerald-400 transition" title="Education"><i
-            class="fas fa-graduation-cap text-2xl"></i></a></li>
-      <li><a href="#experience" class="hover:text-emerald-400 transition" title="Experience"><i
-            class="fas fa-briefcase text-2xl"></i></a></li>
-      <li><a href="#projects" class="hover:text-emerald-400 transition" title="Projects"><i
-            class="fas fa-project-diagram text-2xl"></i></a></li>
-      <li><a href="#skills" class="hover:text-emerald-400 transition" title="Skills"><i
-            class="fas fa-tools text-2xl"></i></a></li>
-      <li><a href="#testimonials" class="hover:text-emerald-400 transition" title="Testimonials"><i
-            class="fas fa-quote-left text-2xl"></i></a></li>
-      <li><a href="#contact" class="hover:text-emerald-400 transition" title="Contact"><i
-            class="fas fa-envelope text-2xl"></i></a></li>
-    </ul>
-  </aside>
-
-  <!-- Hero Section with Particle Background -->
-  <section id="home" class="relative bg-gradient-to-br from-emerald-200 to-teal-200 py-20 overflow-hidden">
-    <div id="particles-js"></div>
-    <div class="container mx-auto px-4 text-center relative z-10">
-      <h1 class="text-5xl md:text-6xl font-bold font-poppins mb-4 animate__animated animate__zoomIn">Maithya Ndavi</h1>
-      <p class="text-xl md:text-2xl font-inter mb-6 animate__animated animate__fadeInUp animate__delay-1s">Computer
-        Science Graduate | Data Science Enthusiast | Machine Learning Practitioner</p>
-      <div>
-        <a href="#contact"
-          class="bg-emerald-600 text-white py-2 px-6 rounded-full hover:bg-emerald-700 transition animate__animated animate__bounceIn animate__delay-2s">Get
-          in Touch</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="py-16 bg-white dark:bg-gray-900 dark:text-white parallax"
-    style="background-image: url('https://images.unsplash.com/photo-1516321310764-8d8a360dd69b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold font-poppins mb-8 text-center animate__animated animate__fadeInUp">About Me</h2>
-      <div class="max-w-4xl mx-auto text-center font-inter glassmorphism p-8 rounded-lg hover-glow">
-        <p class="mb-4">I am Maithya Ndavi, a dedicated Computer Science graduate from Egerton University, born and
-          raised in Makindu, Makueni County, Kenya. My fascination with technology sparked at St. Stephen Makindu Boys’
-          High School, where I cultivated a love for problem-solving and innovation, paving the way for my pursuit of a
-          Bachelor of Science in Computer Science.</p>
-        <p class="mb-4">My academic journey has equipped me with a robust foundation in data science, machine learning,
-          and software development. I thrive on transforming complex datasets into meaningful insights, leveraging tools
-          like Python, SQL, and Power BI. My internship at InspireHub Limited was a defining experience, where I
-          designed efficient database systems and crafted impactful data visualizations, fueling my passion for
-          data-driven solutions.</p>
-        <p class="mb-4">A cornerstone of my academic career was my fourth-year project at Egerton University, the
-          Industrial Attachment Management System. This web-based platform revolutionized internship coordination by
-          offering secure user authentication, grade submission, and automated report generation. The project
-          underscored my ability to apply technical expertise to solve real-world challenges.</p>
-        <p>With certifications in Data Science, AI, and Python from HPLife Global and Pantech Solutions, I am committed
-          to lifelong learning and pushing the boundaries of technology. My leadership roles, including President of the
-          Students’ Council and Chairman of the Science Club, have honed my ability to foster collaboration and drive
-          innovation. I am eager to contribute my skills to impactful projects in data science and technology.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education Section -->
-  <section id="education" class="py-16 bg-gray-100 dark:bg-gray-800 dark:text-white">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold font-poppins mb-8 text-center animate__animated animate__fadeInUp">Education</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover-glow">
-          <h3 class="text-xl font-semibold font-poppins">Bachelor of Science in Computer Science</h3>
-          <p class="font-inter text-gray-600 dark:text-gray-300">Egerton University, Njoro | 2021 – April 2025</p>
-          <p class="font-inter mt-2">Relevant Coursework: Data Science, Machine Learning, Artificial Intelligence,
-            Software Engineering, Database Systems</p>
+    const Header = () => (
+      <header className="sticky top-0 z-50 bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 shadow-lg glassmorphism" data-aos="fade-down">
+        <div className="container mx-auto px-4 flex justify-between items-center max-w-7xl">
+          <h1 className="text-3xl font-bold">Maithya Ndavi</h1>
+          <div className="flex items-center space-x-4">
+            <nav className="hidden md:flex space-x-6">
+              {['Home', 'About', 'Education', 'Experience', 'Skills', 'Certifications', 'Leadership', 'Contact'].map(item => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-lg hover:text-gray-200 transition"
+                >
+                  {item}
+                </a>
+              ))}
+            </nav>
+            <ThemeToggle />
+          </div>
         </div>
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover-glow">
-          <h3 class="text-xl font-semibold font-poppins">Kenya Certificate of Secondary Education</h3>
-          <p class="font-inter text-gray-600 dark:text-gray-300">St. Stephen Makindu Boys’ High School | 2017 – 2020 |
-            Grade: B+ (72 points)</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      </header>
+    );
 
-  <!-- Experience Section -->
-  <section id="experience" class="py-16 bg-white dark:bg-gray-900 dark:text-white parallax"
-    style="background-image: url('https://images.unsplash.com/photo-1516321310764-8d8a360dd69b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold font-poppins mb-8 text-center animate__animated animate__fadeInUp">Professional
-        Experience</h2>
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow">
-          <h3 class="text-xl font-semibold font-poppins">Student Attachment (Intern)</h3>
-          <p class="font-inter text-gray-600 dark:text-gray-300">InspireHub Limited, Machakos | May 2024 – August 2024
+    const Hero = () => (
+      <section id="home" className="relative bg-gradient-to-br from-emerald-200 to-teal-200 py-24 text-center overflow-hidden" data-aos="fade-up">
+        <div className="neural-node"></div>
+        <div className="neural-node"></div>
+        <div className="neural-node"></div>
+        <div className="neural-node"></div>
+        <div className="neural-line" style={{ width: '100px', top: '30%', left: '20%', transform: 'rotate(45deg)' }}></div>
+        <div className="neural-line" style={{ width: '80px', top: '50%', left: '60%', transform: 'rotate(-30deg)' }}></div>
+        <div className="container mx-auto px-4 max-w-7xl relative z-10">
+          <h1 className="text-6xl font-bold mb-4" data-aos="zoom-in">Maithya Ndavi</h1>
+          <p className="text-2xl mb-8" data-aos="zoom-in" data-aos-delay="200">
+            Computer Science Graduate | Data Science & AI Innovator
           </p>
-          <ul class="list-disc list-inside font-inter mt-2">
-            <li>Designed and implemented a MySQL database system for attachment records, improving data retrieval
-              efficiency by 20% farci.</li>
-            <li>Conducted data cleaning and preprocessing using Python, ensuring data quality for analysis.</li>
-            <li>Created data visualizations using Excel and Power BI for internal reports.</li>
-            <li>Documented workflows to enhance team collaboration.</li>
-          </ul>
+          <a
+            href="#contact"
+            className="inline-block bg-emerald-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-emerald-700 transition hover-glow"
+            data-aos="zoom-in"
+            data-aos-delay="400"
+          >
+            Get in Touch
+          </a>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    );
 
-  <!-- Projects Section -->
-  <section id="projects" class="py-16 bg-gray-100 dark:bg-gray-800 dark:text-white">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold font-poppins mb-8 text-center animate__animated animate__fadeInUp">Key Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover-glow cursor-pointer"
-          onclick="openProjectModal('attachment')">
-          <h3 class="text-xl font-semibold font-poppins">Industrial Attachment Management System</h3>
-          <p class="font-inter text-gray-600 dark:text-gray-300">Fourth-Year Project</p>
-          <p class="font-inter mt-2">Developed a web-based system to manage student internships, featuring secure
-            authentication, grade submission, and report generation.</p>
+    const About = () => (
+      <section id="about" className="relative py-20 bg-white dark:bg-gray-900 dark:text-white" data-aos="fade-up">
+        <div className="section-bg">
+          <div className="neural-node" style={{ left: '10%', top: '20%' }}></div>
+          <div className="neural-node" style={{ left: '80%', top: '60%' }}></div>
         </div>
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover-glow cursor-pointer"
-          onclick="openProjectModal('sales')">
-          <h3 class="text-xl font-semibold font-poppins">Sales Data Visualization</h3>
-          <p class="font-inter text-gray-600 dark:text-gray-300">Data Science Project</p>
-          <p class="font-inter mt-2">Created interactive dashboards with Power BI to visualize sales data, enabling
-            trend analysis.</p>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h2 className="text-4xl font-bold mb-6 text-center" data-aos="zoom-in">About Me</h2>
+          <p className="text-lg leading-relaxed max-w-4xl mx-auto" data-aos="zoom-in" data-aos-delay="200">
+            I’m Maithya Ndavi, a Computer Science graduate from Egerton University, hailing from Makindu, Kenya. My passion for technology and problem-solving drives my work in data science, machine learning, and software development. I specialize in transforming complex datasets into actionable insights using tools like Python, SQL, and Power BI. My internship at InspireHub Limited honed my skills in database design and data visualization, while my fourth-year project, an Industrial Attachment Management System, streamlined internship coordination with secure authentication and automated reporting. With certifications in AI and Data Science, I’m committed to lifelong learning and delivering innovative, data-driven solutions.
+          </p>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    );
 
-  <!-- Project Modal -->
-  <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-30">
-    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg max-w-lg w-full glassmorphism">
-      <h3 id="modal-title" class="text-2xl font-bold font-poppins mb-4"></h3>
-      <p id="modal-description" class="font-inter mb-4"></p>
-      <p id="modal-details" class="font-inter mb-4"></p>
-      <button onclick="closeProjectModal()"
-        class="bg-emerald-600 text-white py-2 px-4 rounded-full hover:bg-emerald-700">Close</button>
-    </div>
-  </div>
+    const Education = () => (
+      <section id="education" className="relative py-20 bg-gray-100 dark:bg-gray-800 dark:text-white" data-aos="fade-up">
+        <div className="section-bg">
+          <div className="neural-node" style={{ left: '15%', top: '30%' }}></div>
+          <div className="neural-node" style={{ left: '85%', top: '70%' }}></div>
+        </div>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h2 className="text-4xl font-bold mb-6 text-center" data-aos="zoom-in">Education</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                degree: 'Bachelor of Science in Computer Science',
+                institution: 'Egerton University, Njoro',
+                period: '2021 – April 2025',
+                details: 'Relevant Coursework: Data Science, Machine Learning, Artificial Intelligence, Software Engineering, Database Systems'
+              },
+              {
+                degree: 'Kenya Certificate of Secondary Education (KCSE)',
+                institution: 'St. Stephen Makindu Boys’ High School',
+                period: '2017 – 2020',
+                details: 'Grade: B+ (72 points)'
+              }
+            ].map((edu, index) => (
+              <div
+                key={index}
+                className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow data-flow"
+                data-aos="slide-up"
+                data-aos-delay={index * 200}
+              >
+                <h3 className="text-xl font-semibold">{edu.degree}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{edu.institution} | {edu.period}</p>
+                <p className="mt-2 text-gray-600 dark:text-gray-300">{edu.details}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
 
-  <!-- Skills Section -->
-  <section id="skills" class="py-16 bg-white dark:bg-gray-900 dark:text-white">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold font-poppins mb-8 text-center animate__animated animate__fadeInUp">Technical Skills
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow">
-          <h3 class="text-xl font-semibold font-poppins">Programming & Tools</h3>
-          <ul class="font-inter mt-2 space-y-2">
-            <li>Python: <div class="skill-bar">
-                <div class="skill-progress w-[90%]"></div>
-              </div>
-            </li>
-            <li>SQL/MySQL: <div class="skill-bar">
-                <div class="skill-progress w-[85%]"></div>
-              </div>
-            </li>
-            <li>Power BI: <div class="skill-bar">
-                <div class="skill-progress w-[80%]"></div>
-              </div>
-            </li>
-            <li>Git: <div class="skill-bar">
-                <div class="skill-progress w-[75%]"></div>
-              </div>
-            </li>
-          </ul>
+    const Experience = () => (
+      <section id="experience" className="relative py-20 bg-white dark:bg-gray-900 dark:text-white" data-aos="fade-up">
+        <div className="section-bg">
+          <div className="neural-node" style={{ left: '20%', top: '40%' }}></div>
+          <div className="neural-node" style={{ left: '75%', top: '50%' }}></div>
         </div>
-        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow">
-          <h3 class="text-xl font-semibold font-poppins">Data Science</h3>
-          <ul class="font-inter mt-2 space-y-2">
-            <li>Exploratory Data Analysis: <div class="skill-bar">
-                <div class="skill-progress w-[85%]"></div>
-              </div>
-            </li>
-            <li>Data Cleaning: <div class="skill-bar">
-                <div class="skill-progress w-[80%]"></div>
-              </div>
-            </li>
-            <li>Machine Learning: <div class="skill-bar">
-                <div class="skill-progress w-[75%]"></div>
-              </div>
-            </li>
-          </ul>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h2 className="text-4xl font-bold mb-6 text-center" data-aos="zoom-in">Professional Experience</h2>
+          <div
+            className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow data-flow"
+            data-aos="slide-up"
+          >
+            <h3 className="text-xl font-semibold">Student Attachment (Intern)</h3>
+            <p className="text-gray-600 dark:text-gray-300">InspireHub Limited, Machakos | May 2024 – August 2024</p>
+            <ul className="mt-2 text-gray-600 dark:text-gray-300 list-disc list-inside">
+              <li>Designed and implemented a MySQL database system for attachment records, improving data retrieval efficiency by 20%.</li>
+              <li>Conducted data cleaning and preprocessing using Python, ensuring data quality for analysis.</li>
+              <li>Created data visualizations using Excel and Power BI for internal reports.</li>
+              <li>Documented workflows to enhance team collaboration.</li>
+            </ul>
+          </div>
         </div>
-        <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow">
-          <h3 class="text-xl font-semibold font-poppins">Soft Skills</h3>
-          <ul class="font-inter mt-2 space-y-2">
-            <li>Problem-Solving: <div class="skill-bar">
-                <div class="skill-progress w-[90%]"></div>
-              </div>
-            </li>
-            <li>Collaboration: <div class="skill-bar">
-                <div class="skill-progress w-[85%]"></div>
-              </div>
-            </li>
-            <li>Communication: <div class="skill-bar">
-                <div class="skill-progress w-[80%]"></div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    );
 
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="py-16 bg-gray-100 dark:bg-gray-800 dark:text-white parallax"
-    style="background-image: url('https://images.unsplash.com/photo-1516321310764-8d8a360dd69b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold font-poppins mb-8 text-center animate__animated animate__fadeInUp">Testimonials</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow">
-          <p class="font-inter italic">"Maithya demonstrated exceptional technical skills during his internship,
-            significantly improving our data management processes."</p>
-          <p class="font-inter mt-4 font-semibold">– Internship Supervisor, InspireHub Limited</p>
+    const Skills = () => (
+      <section id="skills" className="relative py-20 bg-gray-100 dark:bg-gray-800 dark:text-white" data-aos="fade-up">
+        <div className="section-bg">
+          <div className="neural-node" style={{ left: '25%', top: '20%' }}></div>
+          <div className="neural-node" style={{ left: '70%', top: '60%' }}></div>
         </div>
-        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow">
-          <p class="font-inter italic">"His leadership in the Students’ Council was inspiring, fostering collaboration
-            and innovation among peers."</p>
-          <p class="font-inter mt-4 font-semibold">– Principal, St. Stephen Makindu Boys’ High School</p>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h2 className="text-4xl font-bold mb-6 text-center" data-aos="zoom-in">Technical Skills</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                category: 'Programming & Tools',
+                skills: [
+                  { name: 'Python', level: '90%' },
+                  { name: 'SQL/MySQL', level: '85%' },
+                  { name: 'Power BI', level: '80%' },
+                  { name: 'Git', level: '75%' }
+                ]
+              },
+              {
+                category: 'Data Science',
+                skills: [
+                  { name: 'Exploratory Data Analysis', level: '85%' },
+                  { name: 'Data Cleaning', level: '80%' },
+                  { name: 'Machine Learning', level: '75%' }
+                ]
+              },
+              {
+                category: 'Soft Skills',
+                skills: [
+                  { name: 'Problem-Solving', level: '90%' },
+                  { name: 'Collaboration', level: '85%' },
+                  { name: 'Communication', level: '80%' }
+                ]
+              }
+            ].map((group, index) => (
+              <div
+                key={index}
+                className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow pulse"
+                data-aos="zoom-in"
+                data-aos-delay={index * 100}
+              >
+                <h3 className="text-xl font-semibold mb-4">{group.category}</h3>
+                <ul className="space-y-4">
+                  {group.skills.map((skill, i) => (
+                    <li key={i}>
+                      {skill.name}: <div className="skill-bar"><div className="skill-progress" style={{ width: skill.level }}></div></div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    );
 
-  <!-- Contact Section -->
-  <section id="contact"
-    class="py-16 bg-gradient-to-br from-emerald-300 to-teal-300 dark:bg-gradient-to-br dark:from-gray-700 dark:to-gray-800">
-    <div class="container mx-auto px-4 text-center">
-      <h2
-        class="text-4xl font-bold font-poppins mb-8 animate__animated animate__fadeInUp text-gray-800 dark:text-white">
-        Contact Me</h2>
-      <div class="max-w-3xl mx-auto glassmorphism p-8 rounded-lg hover-glow bg-opacity-30 backdrop-blur-lg">
-        <div class="flex items-center justify-center mb-4">
-          <i class="fas fa-envelope text-emerald-600 dark:text-emerald-400 text-2xl mr-2 contact-icon"></i>
-          <p class="font-inter text-lg text-gray-800 dark:text-white">Email: <a href="mailto:coheights254@gmail.com"
-              class="text-emerald-600 hover:underline dark:text-emerald-400">coheights254@gmail.com</a></p>
+    const Certifications = () => (
+      <section id="certifications" className="relative py-20 bg-white dark:bg-gray-900 dark:text-white" data-aos="fade-up">
+        <div className="section-bg">
+          <div className="neural-node" style={{ left: '30%', top: '30%' }}></div>
+          <div className="neural-node" style={{ left: '65%', top: '70%' }}></div>
         </div>
-        <div class="flex items-center justify-center mb-4">
-          <i class="fas fa-phone text-emerald-600 dark:text-emerald-400 text-2xl mr-2 contact-icon"></i>
-          <p class="font-inter text-lg text-gray-800 dark:text-white">Phone: +254 112 225 426 / +254 742 702 766</p>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h2 className="text-4xl font-bold mb-6 text-center" data-aos="zoom-in">Certifications</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              'Data Science and Analytics, HPLife Global (2024)',
+              'AI for Beginners, HPLife Global (2024)',
+              'Master Class on AI and Machine Learning (30 Days), Pantech Solutions (2024)',
+              'Master Class on Python Programming (10 Days), Pantech Solutions (2022)',
+              'Web Development, Python, and SQL, Mimo Online (2022)',
+              'Data Science Webinar (5 Days) (2024)'
+            ].map((cert, index) => (
+              <div
+                key={index}
+                className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-md glassmorphism hover-glow data-flow"
+                data-aos="slide-up"
+                data-aos-delay={index * 100}
+              >
+                <p className="text-gray-700 dark:text-gray-300">{cert}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div class="flex items-center justify-center mb-4">
-          <i class="fas fa-map-marker-alt text-emerald-600 dark:text-emerald-400 text-2xl mr-2 contact-icon"></i>
-          <p class="font-inter text-lg text-gray-800 dark:text-white">Address: P.O. Box 90138, Makindu, Makueni County,
-            Kenya</p>
-        </div>
-        <div class="mt-6">
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=coheights254@gmail.com" target="_blank"
-            class="bg-emerald-600 text-white py-3 px-8 rounded-full hover:bg-emerald-700 transition animate__animated animate__bounceIn text-lg">Send
-            a Message</a>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    );
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-4">
-    <div class="container mx-auto px-4 text-center">
-      <p class="font-inter">© 2025 Maithya Ndavi. All rights reserved.</p>
-    </div>
-  </footer>
+    const Leadership = () => (
+      <section id="leadership" className="relative py-20 bg-gray-100 dark:bg-gray-800 dark:text-white" data-aos="fade-up">
+        <div className="section-bg">
+          <div className="neural-node" style={{ left: '35%', top: '40%' }}></div>
+          <div className="neural-node" style={{ left: '60%', top: '50%' }}></div>
+        </div>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h2 className="text-4xl font-bold mb-6 text-center" data-aos="zoom-in">Leadership & Extracurriculars</h2>
+          <div className="space-y-6">
+            {[
+              {
+                role: 'President, Students’ Council',
+                institution: 'St. Stephen Makindu Boys’ School',
+                period: '2019 – 2020',
+                details: 'Led 60 council members in organizing school events, improving student engagement by 25%.'
+              },
+              {
+                role: 'Chairman, Science Club',
+                institution: 'St. Stephen Makindu Boys’ School',
+                period: '2018 – 2020',
+                details: 'Organized science fairs and competitions, increasing participation by 30%.'
+              },
+              {
+                role: 'Vice Chairman, Young Christian Union',
+                institution: 'St. Stephen Makindu Boys’ School',
+                period: '2018 – 2020',
+                details: 'Planned community outreach events, fostering collaboration and engagement.'
+              }
+            ].map((activity, index) => (
+              <div
+                key={index}
+                className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md glassmorphism hover-glow data-flow"
+                data-aos="slide-up"
+                data-aos-delay={index * 200}
+              >
+                <h3 className="text-xl font-semibold">{activity.role}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{activity.institution} | {activity.period}</p>
+                <p className="mt-2 text-gray-600 dark:text-gray-300">{activity.details}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
 
-  <!-- Back to Top Button -->
-  <button id="back-to-top" class="bg-emerald-600 text-white p-3 rounded-full hover:bg-emerald-700 transition">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+    const Contact = () => (
+      <section id="contact" className="relative py-20 bg-gradient-to-br from-emerald-300 to-teal-300 dark:bg-gradient-to-br dark:from-gray-700 dark:to-gray-800 contact-section" data-aos="fade-up">
+        <div className="container mx-auto px-4 max-w-3xl relative">
+          <div className="contact-node" style={{ top: '10%', left: '10%' }}></div>
+          <div className="contact-node" style={{ bottom: '10%', right: '10%' }}></div>
+          <h2 className="text-4xl font-bold mb-6 text-center text-gray-800 dark:text-white" data-aos="zoom-in">Contact Me</h2>
+         
+          <div className="space-y-6">
+            <div className="flex items-center justify-center" data-aos="fade-up" data-aos-delay="200">
+              <i className="fas fa-envelope text-emerald-600 dark:text-emerald-400 text-2xl mr-2 contact-icon"></i>
+              <p className="text-lg text-gray-800 dark:text-white">
+                Email: <a href="mailto:coheights254@gmail.com" className="text-emerald-600 dark:text-emerald-400 hover:underline">coheights254@gmail.com</a>
+              </p>
+            </div>
+            <div className="flex items-center justify-center" data-aos="fade-up" data-aos-delay="400">
+              <i className="fas fa-phone text-emerald-600 dark:text-emerald-400 text-2xl mr-2 contact-icon"></i>
+              <p className="text-lg text-gray-800 dark:text-white">Phone: +254 112 225 426 / +254 742 702 766</p>
+            </div>
+            <div className="flex items-center justify-center" data-aos="fade-up" data-aos-delay="600">
+              <i className="fas fa-map-marker-alt text-emerald-600 dark:text-emerald-400 text-2xl mr-2 contact-icon"></i>
+              <p className="text-lg text-gray-800 dark:text-white">Address: P.O. Box 90138, Makindu, Kenya</p>
+            </div>
+            <div className="mt-6 text-center" data-aos="fade-up" data-aos-delay="800">
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=coheights254@gmail.com"
+                target="_blank"
+                className="inline-block bg-emerald-600 text-white py-3 px-8 rounded-full text-lg hover:bg-emerald-700 transition hover-glow"
+              >
+                Send a Message
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
 
-  <script>
-  // Initialize Particles.js
-  particlesJS('particles-js', {
-    particles: {
-      number: {
-        value: 80,
-        density: {
-          enable: true,
-          value_area: 800
+    const Footer = () => (
+      <footer className="bg-gray-800 text-white py-4" data-aos="fade-up">
+        <div className="container mx-auto px-4 text-center max-w-7xl">
+          <p>© {new Date().getFullYear()} Maithya Ndavi. All rights reserved.</p>
+        </div>
+      </footer>
+    );
+
+    const BackToTop = () => {
+      const [visible, setVisible] = useState(false);
+      useEffect(() => {
+        const toggleVisibility = () => {
+          setVisible(window.scrollY > 300);
+        };
+        window.addEventListener('scroll', toggleVisibility);
+        return () => window.removeEventListener('scroll', toggleVisibility);
+      }, []);
+      return (
+        <button
+          id="back-to-top"
+          className={`bg-emerald-600 text-white p-3 rounded-full hover:bg-emerald-700 transition fixed bottom-8 right-8 z-50 ${visible ? 'block' : 'hidden'}`}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <i className="fas fa-arrow-up"></i>
+        </button>
+      );
+    };
+
+    const App = () => {
+      useEffect(() => {
+        if (window.AOS) {
+          window.AOS.init({ duration: 1000 });
         }
-      },
-      color: {
-        value: '#ffffff'
-      },
-      shape: {
-        type: 'circle'
-      },
-      opacity: {
-        value: 0.5,
-        random: true
-      },
-      size: {
-        value: 3,
-        random: true
-      },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: '#ffffff',
-        opacity: 0.4,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: 'none',
-        random: true
-      }
-    },
-    interactivity: {
-      detect_on: 'canvas',
-      events: {
-        onhover: {
-          enable: true,
-          mode: 'repulse'
-        },
-        onclick: {
-          enable: true,
-          mode: 'push'
-        }
-      },
-      modes: {
-        repulse: {
-          distance: 100
-        },
-        push: {
-          particles_nb: 4
-        }
-      }
-    },
-    retina_detect: true
-  });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector(anchor.getAttribute('href')).scrollIntoView({
+              behavior: 'smooth'
+            });
+          });
+        });
+      }, []);
 
-  // Smooth scrolling
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
-    });
-  });
+      return (
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-800 dark:text-white transition-colors duration-300">
+          <Sidebar />
+          <Header />
+          <Hero />
+          <About />
+          <Education />
+          <Experience />
+          <Skills />
+          <Certifications />
+          <Leadership />
+          <Contact />
+          <Footer />
+          <BackToTop />
+        </div>
+      );
+    };
 
-  // GSAP Animations
-  gsap.from('nav', {
-    y: -100,
-    opacity: 0,
-    duration: 1,
-    ease: 'power3.out'
-  });
-  gsap.from('#home h1', {
-    scale: 0.5,
-    opacity: 0,
-    duration: 1.2,
-    delay: 0.5,
-    ease: 'elastic.out(1, 0.3)'
-  });
-  gsap.from('#home p', {
-    y: 50,
-    opacity: 0,
-    duration: 1,
-    delay: 1,
-    ease: 'power3.out'
-  });
-  gsap.from('#home a', {
-    scale: 0,
-    opacity: 0,
-    duration: 0.8,
-    delay: 1.5,
-    stagger: 0.2,
-    ease: 'back.out(1.7)'
-  });
-
-  // Dark Mode Toggle
-  const darkModeToggle = document.getElementById('dark-mode-toggle');
-  darkModeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    darkModeToggle.innerHTML = document.body.classList.contains('dark') ?
-      '<i class="fas fa-sun"></i>' :
-      '<i class="fas fa-moon"></i>';
-  });
-
-  // Mobile Menu Toggle
-  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  mobileMenuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-    mobileMenuToggle.innerHTML = mobileMenu.classList.contains('hidden') ?
-      '<i class="fas fa-bars"></i>' :
-      '<i class="fas fa-times"></i>';
-  });
-
-  // Back to Top Button
-  const backToTop = document.getElementById('back-to-top');
-  window.addEventListener('scroll', () => {
-    backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-  });
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-
-  // Project Modal
-  function openProjectModal(project) {
-    const modal = document.getElementById('project-modal');
-    const title = document.getElementById('modal-title');
-    const description = document.getElementById('modal-description');
-    const details = document.getElementById('modal-details');
-
-    if (project === 'attachment') {
-      title.textContent = 'Industrial Attachment Management System';
-      description.textContent =
-        'A web-based platform to manage student internships, developed as a fourth-year project at Egerton University.';
-      details.textContent =
-        'Built with PHP, MySQL, and Tailwind CSS, the system features secure user authentication, grade submission, report generation, and a dashboard for supervisors and students. Improved internship coordination efficiency by 30%.';
-    } else if (project === 'sales') {
-      title.textContent = 'Sales Data Visualization';
-      description.textContent = 'Built interactive dashboards with Power BI to visualize sales data.';
-      details.textContent =
-        'Created dynamic reports with drill-down capabilities, enabling stakeholders to analyze sales by region, product, and time period. Improved decision-making efficiency by 15%.';
-    }
-
-    modal.classList.remove('hidden');
-    gsap.from(modal, {
-      scale: 0.7,
-      opacity: 0,
-      duration: 0.5,
-      ease: 'back.out(1.7)'
-    });
-  }
-
-  function closeProjectModal() {
-    const modal = document.getElementById('project-modal');
-    gsap.to(modal, {
-      scale: 0.7,
-      opacity: 0,
-      duration: 0.3,
-      ease: 'back.in(1.7)',
-      onComplete: () => modal.classList.add('hidden')
-    });
-  }
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
   </script>
 </body>
-
 </html>
